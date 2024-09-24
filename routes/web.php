@@ -27,6 +27,24 @@ Route::get('/posts', function () {
     ]]);
 });
 
+
+Route::get('/posts/{id}', function($id) {
+    $posts = [
+        [
+            'id' => 1,
+            'title' => 'Article Title 1',
+            'author' => 'Radian Try Darmawan',
+            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
+        ],
+        [
+            'id' => 2,
+            'title' => 'Article Title 2',
+            'author' => 'Radian Try Darmawan',
+            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
+        ]
+        ];
+});
+
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact']);
 });
