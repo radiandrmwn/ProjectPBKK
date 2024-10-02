@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+ 
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home Page']);
@@ -12,46 +14,13 @@ Route::get('/about', function () {
 });
 
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog', 'posts' => [
-        [
-            'id' => 1,
-            'slug' => 'article-title-1',
-            'title' => 'Article Title 1',
-            'author' => 'Radian Try Darmawan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'article-title-2',
-            'title' => 'Article Title 2',
-            'author' => 'Radian Try Darmawan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate skibidi'
-        ]
-    ]]);
+    return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
 });
 
 
 Route::get('/posts/{slug}', function($slug) {
-    $posts = [
-        [
-            'id' => 1,
-            'slug' => 'article-title-1',
-            'title' => 'Article Title 1',
-            'author' => 'Radian Try Darmawan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
-        ],
-        [
-            'id' => 2,
-            'slug' => 'article-title-2',
-            'title' => 'Article Title 2',
-            'author' => 'Radian Try Darmawan',
-            'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
-        ]
-    ];
-
-        $post = Arr::first($posts, function ($post) use ($slug) {
-            return $post['slug'] == $slug;
-    });
+    
+        $post = Post::find($slug);
 
     return view('post', ['title' => 'Single Post','post' => $post]);
 });
