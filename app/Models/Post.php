@@ -2,39 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Post 
+class Post extends Model
 {
-    public static function all()
-    {
-        return [
-            [
-                'id' => 1,
-                'slug' => 'article-title-1',
-                'title' => 'Article Title 1',
-                'author' => 'Radian Try Darmawan',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate quidem quibusdam repellendus et, dicta molestias culpa ex reprehenderit iste minima doloribus quae adipisci veritatis unde voluptatem nostrum.'
-            ],
-
-            [
-                'id' => 2,
-                'slug' => 'article-title-2',
-                'title' => 'Article Title 2',
-                'author' => 'Radian Try Darmawan',
-                'body' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos incidunt reiciendis cupiditate skibidi'
-            ]
-        ];
-    }
-
-    public static function find($slug): array
-    {
-        $post = Arr::first(static::all(), fn ($post) => $post['slug'] == $slug);
-
-        if (! $post) {
-            abort(404);
-        }
-
-        return $post;
-    }
+    use HasFactory;
+    protected $fillable = ['title', 'author', 'slug','body'];
 }
