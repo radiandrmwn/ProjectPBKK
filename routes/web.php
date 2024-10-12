@@ -15,10 +15,9 @@ Route::get('/about', function () {
     return view('about', ['name' => 'Radian Try Darmawan' , 'title' => 'Contact']);
 });
 
-Route::get('/posts', function () {
-    // $posts = post::with(['author', 'category'])->latest()->get();
-    $posts = Post::latest()->get();
-    return view('posts', ['title' => 'Blog', 'posts' => $posts]);
+Route::get('/posts', function () {    
+    return view('posts', ['title' => 'Blog', 'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->get
+    ()]);
 });
 
 
